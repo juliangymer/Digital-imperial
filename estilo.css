@@ -1,0 +1,36 @@
+*{
+   padding:0;
+   margin:0;
+   font-family: sans-serif;
+}
+
+header{
+   margin-bottom: 30px;
+}
+
+p{
+   margin-left: 5px;
+}
+
+div{
+   margin-left: 10px;
+}
+
+nav{
+background-color: rgb(7, 98, 245);
+font-size: 2em;
+}
+
+li{
+display:inline;
+margin: 1em;
+}
+
+a:hover {
+   color:red;
+}
+
+a {
+  color:rgb(226, 226, 226);
+   text-decoration: none;
+}
