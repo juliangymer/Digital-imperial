@@ -7,17 +7,23 @@ body{
    color: #ffffff;
 }
 
-#area_de_dibujo{
+#canvas{
+
    background-color: white;
 }
 
+#canvas:hover{
+   cursor: crosshair;
+
+}
+
 .box{
-   width: 300px;
-   padding: 40px;
+   width: 25em;
+   padding: 30px 30px 20px 30px;
    position: absolute;
    top: 50%;
    left: 50%;
-   border: 1px solid #4b4a4a;
+   border: 2px solid #4b4a4a;
    border-radius: 12px;
    transform: translate(-50%,-50%);
    text-align: center;
@@ -27,8 +33,41 @@ body{
    text-align: center;
 }
 
-a{
-   text-decoration: none;
+ul {
+   display:block;
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+   overflow: hidden;
+   background-color: #333;
+   position:relative;
+ }
+ 
+li{
+   float:left;
+}
+
+
+li a {
+   position: relative;
+  display: flex;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  margin: 0px 2em;
+  text-decoration: none;
+  font-size: 20px;
+  left:auto;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+b{
+margin: 15px;
+padding: 10px;
+background-color: red;
 }
 
 p{
@@ -50,36 +89,57 @@ h1{
    border: 2px solid #3498db;
    text-align: center;
    padding: 14px 10px;
-   width: 200px;
+   width: 280px;
    outline: none;
    color: white;
+   font-size: 20px;
    border-radius: 24px;
    transition: 0.25s;
 }
 
-.box input[type = "text"]:hover,.box input[type = "password"]:hover,
-.box input[type = "text"]:focus,.box input[type = "password"]:focus{
+.registro{
+   position: relative;
+   top: -60px;
+   left: 155px;
+   color: #fff;
+   padding: 0;
+   text-decoration: none;
+}
+.registro:hover{
+   transition: 0.6s;
+   color: #ff0000;
+   border: none;
+   pointer-events: painted;
+}
 
-   width: 280px;
+.box input[type = "text"]:hover,.box input[type = "text"]:focus,
+.box input[type = "email"]:hover, .box input[type = "email"]:focus,
+.box input[type = "password"]:hover,.box input[type = "password"]:focus{
+
+   width: 380px;
    border-color: #2ecc71;
-   transition: 0.5s;
+   transition: 0.5s; 
+   pointer-events: painted;
 }
 
 .box input[type = "submit"]{
+   position: relative;
+   left: 0;
    background: none;
    display: block;
-   margin: 20px auto;
+   margin: 25px auto;
    text-align: center;
    border: none;
-   padding: 14px 40px;
+   padding: 15px 60px;
    outline: none;
    color: #006eff;
-   border-radius: 24px;
+   border-radius: 30px;
+   font-size: 24px;
    }
 
 .box input[type = "submit"]:hover{
    color: black;
    background: #3498db;
    transition: 0.8s;
-   box-shadow: 0 0 10px #3498db, 0 0 10px #3498db, 0 0 40px #3498db;
+   box-shadow: 0 0 10px #3498db, 0 0 10px #3498db, 0 0 50px #3498db;
 }

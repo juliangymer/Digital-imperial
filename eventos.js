@@ -1,42 +1,57 @@
-
 var teclas = {
    UP: 38,
    DOWN: 40,
    LEFT: 37,
-   RIGHT: 39,
-   W: 87,
-   A: 65,
-   S: 83,
-   D: 68,
+   RIGHT: 39
 };
 
-var largo = document.getElementById("largo");
-var grosor = document.getElementById("grosor");
-var color = document.getElementById("cualColor");
 
 
+var canvas = document.getElementById("canvas");
+var lienzo = canvas.getContext("2d");
+var cw = canvas.width =  800,
+  cx = cw / 2;
+var ch = canvas.height = 381,
+  cy = ch / 2;
 
-document.addEventListener("keydown", dibujarTeclado);
-var cuadrito = document.getElementById("area_de_dibujo");
-var papel = cuadrito.getContext("2d");
-var x = 400;
-var y = 190;
+var color = document.getElementById("cualColor")
+var grosor = document.getElementById("grosor")
+var largo = document.getElementById("largo")
 
-dibujarBorde("black", 1, 1, 800, 1, papel);
-dibujarBorde("black", 1, 1, 1, 400, papel);
-dibujarBorde("black", 799, 410, 799, 1, papel);
-dibujarBorde("black", 1, 380, 800, 380, papel);
+var dibujar = false;
+lienzo.lineJoin = "round";
 
+canvas.addEventListener('mousedown', function(evt) {
+  dibujar = true;
+  lienzo.beginPath();
 
-function dibujarBorde(color, xinicial, yinicial, xfinal, yfinal, lienzo)
-{
-   lienzo.beginPath();
-   lienzo.strokeStyle = color;
-   lienzo.lineWidth = 2;
-   lienzo.moveTo(xinicial, yinicial);
-   lienzo.lineTo(xfinal, yfinal);
-   lienzo.stroke();
-   lienzo.closePath();
+}, false);
+
+canvas.addEventListener('mouseup', function(evt) {
+  dibujar = false;
+
+}, false);
+
+canvas.addEventListener("mouseout", function(evt) {
+  dibujar = false;
+}, false);
+
+canvas.addEventListener("mousemove", function(evt) {
+  if (dibujar) {
+    var m = oMousePos(canvas, evt);
+    lienzo.lineTo(m.x, m.y);
+    lienzo.stroke();
+    lienzo.lineWidth= grosor.value;
+    lienzo.strokeStyle = color.value;
+  }
+}, false);
+
+function oMousePos(canvas, evt) {
+  var ClientRect = canvas.getBoundingClientRect();
+  return { //objeto
+    x: Math.round(evt.clientX - ClientRect.left),
+    y: Math.round(evt.clientY - ClientRect.top)
+  }
 }
 
 function dibujarLinea(color, xinicial, yinicial, xfinal, yfinal, lienzo)
@@ -50,84 +65,36 @@ function dibujarLinea(color, xinicial, yinicial, xfinal, yfinal, lienzo)
    lienzo.closePath();
 }
 
-function borrarLinea(color, xinicial, yinicial, xfinal, yfinal, lienzo)
-{
-   lienzo.beginPath();
-   lienzo.strokeStyle = color;
-   lienzo.lineWidth = parseFloat(grosor.value);
-   lienzo.moveTo(xinicial, yinicial);
-   lienzo.lineTo(xfinal, yfinal);
-   lienzo.stroke();
-   lienzo.closePath();
-}
+var movimiento = parseFloat(largo.value);
+var x = 400;
+var y = 190;
+var colorcito = color.value
+document.addEventListener("keydown", dibujarTeclado)
 
 function dibujarTeclado(evento)
  {
+   console.log(evento);
    
-   console.log(evento)
-   
-   var borrar = "white";
-   var movimiento = parseFloat(largo.value);
-   switch (evento.keyCode) {
-      case teclas.W:
-      borrarLinea(borrar, x, y, x, y - movimiento, papel);
-       y = y - movimiento;
-   break
-   case teclas.S:
-      borrarLinea(borrar, x, y, x, y + movimiento, papel);
-       y = y + movimiento;
-   break;
-   case teclas.A:
-      borrarLinea(borrar, x, y, x - movimiento, y, papel);
-       x = x - movimiento;
-   break
-   case teclas.D:
-      borrarLinea(borrar, x, y, x + movimiento, y, papel);
-       x = x + movimiento;
-      break;         
-
-   }
-   if (color.value == "rojo") {
-      var colorcito = "red";
+  
       switch (evento.keyCode) 
    {
 
    case teclas.UP:
-      dibujarLinea(colorcito, x, y, x, y - movimiento, papel);
+      dibujarLinea(colorcito, x, y, x, y - movimiento, lienzo);
        y = y - movimiento;
    break
    case teclas.DOWN:
-      dibujarLinea(colorcito, x, y, x, y + movimiento, papel);
+      dibujarLinea(colorcito, x, y, x, y + movimiento, lienzo);
        y = y + movimiento;
    break;
    case teclas.LEFT:
-      dibujarLinea(colorcito, x, y, x - movimiento, y, papel);
+      dibujarLinea(colorcito, x, y, x - movimiento, y, lienzo);
        x = x - movimiento;
    break
    case teclas.RIGHT:
-      dibujarLinea(colorcito, x, y, x + movimiento, y, papel);
+      dibujarLinea(colorcito, x, y, x + movimiento, y, lienzo);
        x = x + movimiento;
-      break}
+      break
    }
-   else 
-      var colorcito = color.value;
-      switch (evento.keyCode) 
-   {
-
-   case teclas.UP:
-      dibujarLinea(colorcito, x, y, x, y - movimiento, papel);
-       y = y - movimiento;
-   break
-   case teclas.DOWN:
-      dibujarLinea(colorcito, x, y, x, y + movimiento, papel);
-       y = y + movimiento;
-   break;
-   case teclas.LEFT:
-      dibujarLinea(colorcito, x, y, x - movimiento, y, papel);
-       x = x - movimiento;
-   break
-   case teclas.RIGHT:
-      dibujarLinea(colorcito, x, y, x + movimiento, y, papel);
-       x = x + movimiento;
-      break}
+   
    }

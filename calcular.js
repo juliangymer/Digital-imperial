@@ -1,14 +1,15 @@
 var tablaDe = document.getElementById("tablas");
-var parrafoTabla = document.getElementById("pTablas");
+var parrafoTabla = document.getElementById("span");
 var enviarTablas = document.getElementById("enviarTablas");
 var max = 10
 enviarTablas.addEventListener("click", tablas);
 
 function tablas()
-{
+{ console
    for (var i = 1; i <= max; i++) 
    {
-      parrafoTabla.innerHTML = "<p>" + tablaDe.value * i + "</p";
+      console.log(i + " x " + parseFloat(tablaDe.value) + " = "
+      + parseFloat(tablaDe.value) * i );
    }
 }
 
